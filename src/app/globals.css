@@ -19,8 +19,25 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  @apply block w-full rounded-md border-0 p-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-500 focus:ring-1 focus:ring-inset focus:ring-indigo-600 bg-white;
+}
+
+label {
+  @apply block text-sm font-medium leading-6 text-slate-500 first-letter:capitalize;
+}
+
+.btn-primary {
+  @apply text-white cursor-pointer bg-indigo-600 px-4 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed;
+}
+
+.text-link {
+  @apply text-sm text-indigo-600 hover:text-indigo-700 underline;
 }
