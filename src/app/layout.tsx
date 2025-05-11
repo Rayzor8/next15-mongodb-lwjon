@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${geistMono.className} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${geistMono.className} antialiased flex flex-col  min-h-screen h-screen`}
       >
         <header className="container mx-auto">
-          <nav className="flex gap-4 justify-between px-2 py-4 items-center bg-amber-800 text-white text-lg font-bold">
+          <nav className="flex gap-4 justify-between px-2 py-4 items-center bg-amber-800 text-white text-lg font-bold flex-shrink-0">
             <Link href="/">Home</Link>
             <div className="space-x-4">
               <Link href="/register">Register</Link>
@@ -41,8 +41,8 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="container mx-auto py-2 text-center bg-amber-100">
-          <p>Copyright &copy; 2023</p>
+        <footer className="container mx-auto py-2 text-center bg-amber-100 flex-shrink-0">
+          <p>Copyright &copy; 2025</p>
         </footer>
       </body>
     </html>
