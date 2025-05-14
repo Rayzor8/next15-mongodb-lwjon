@@ -40,3 +40,7 @@ label {
 .text-link {
   @apply text-sm text-indigo-600 hover:text-indigo-700 underline;
 }
+
+.errorMsg{
+  @apply text-red-500 text-sm;
+}
