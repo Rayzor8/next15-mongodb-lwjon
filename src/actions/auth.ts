@@ -1,8 +1,12 @@
 "use server";
 
+import { getCollection } from "@/lib/db";
 import { RegisterSchema } from "@/lib/validations";
+import bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
 
 export async function register(prevState: unknown, formData: FormData) {
+  // Check if form data is valid
   const validatedFields = RegisterSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -12,9 +16,32 @@ export async function register(prevState: unknown, formData: FormData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      email:formData.get("email"),
+      email: formData.get("email"),
     };
   }
 
-  console.log(validatedFields.data);
+  const { email, password } = validatedFields.data;
+  const userCollection = await getCollection("users");
+
+  if (!userCollection)
+    return { errors: { email: ["User collection not found"] } };
+
+  // Check if user already exists
+  const existingUser = await userCollection.findOne({ email });
+
+  if (existingUser) return { errors: { email: ["User already exists"] } };
+
+  // Hash password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Create user
+  const results = await userCollection.insertOne({
+    email,
+    password: hashedPassword,
+  });
+  console.log(results);
+
+  // Create session
+
+  redirect("/dashboard");
 }
