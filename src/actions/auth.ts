@@ -1,6 +1,7 @@
 "use server";
 
 import { getCollection } from "@/lib/db";
+import { createSession } from "@/lib/session";
 import { RegisterSchema } from "@/lib/validations";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
@@ -39,9 +40,10 @@ export async function register(prevState: unknown, formData: FormData) {
     email,
     password: hashedPassword,
   });
+
   console.log(results);
 
   // Create session
-
+  await createSession(results.insertedId.toString());
   redirect("/dashboard");
 }
