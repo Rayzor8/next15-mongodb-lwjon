@@ -10,6 +10,7 @@ export default function Navbar() {
         <div className="space-x-4">
           <NavLink href="/register" label="Register" />
           <NavLink href="/login" label="Login" />
+          <NavLink href="/dashboard" label="Dashboard" />
         </div>
       </nav>
     </header>

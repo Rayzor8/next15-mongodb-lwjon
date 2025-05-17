@@ -75,7 +75,7 @@ export default function Register() {
           <button type="submit" className="btn-primary" disabled={pending}>
             {pending ? "Loading..." : "Register"}
           </button>
-          <Link href="/" className="text-link">
+          <Link href="/login" className="text-link">
             Login instead...
           </Link>
         </div>

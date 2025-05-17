@@ -31,3 +31,21 @@ export const RegisterSchema = z
       });
     }
   });
+
+export const LoginSchema = z.object({
+  email: z
+    .string()
+    .email({
+      message: "Please enter a valid email address",
+    })
+    .trim(),
+  password: z
+    .string()
+    .min(3, {
+      message: "Password must be at least 3 characters long",
+    })
+    .max(10, {
+      message: "Password must be less than 10 characters long",
+    })
+    .trim(),
+});

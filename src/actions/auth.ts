@@ -22,15 +22,29 @@ export async function register(prevState: unknown, formData: FormData) {
   }
 
   const { email, password } = validatedFields.data;
+
   const userCollection = await getCollection("users");
 
   if (!userCollection)
-    return { errors: { email: ["User collection not found"] } };
+    return {
+      errors: {
+        email: ["User collection not found"],
+        password: [],
+        confirmPassword: [],
+      },
+    };
 
   // Check if user already exists
   const existingUser = await userCollection.findOne({ email });
 
-  if (existingUser) return { errors: { email: ["User already exists"] } };
+  if (existingUser)
+    return {
+      errors: {
+        email: ["User already exists"],
+        password: [],
+        confirmPassword: [],
+      },
+    };
 
   // Hash password
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,4 +60,8 @@ export async function register(prevState: unknown, formData: FormData) {
   // Create session
   await createSession(results.insertedId.toString());
   redirect("/dashboard");
+}
+
+export async function login(prevState: unknown, formData: FormData) {
+  console.log(formData.get("email"));
 }
