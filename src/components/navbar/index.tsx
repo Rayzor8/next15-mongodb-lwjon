@@ -1,17 +1,22 @@
-"use client";
-
+import getAuthUser from "@/lib/get-auth-user";
 import NavLink from "./navlink";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const authUser = await getAuthUser();
+
   return (
     <header>
-      <nav className="flex gap-4 justify-between px-2 py-4 items-center bg-amber-800 text-white text-lg font-bold flex-shrink-0">
+      <nav className="flex gap-4 justify-between p-4 items-center bg-amber-800 text-white text-lg font-bold flex-shrink-0">
         <NavLink href="/" label="Home" />
-        <div className="space-x-4">
-          <NavLink href="/register" label="Register" />
-          <NavLink href="/login" label="Login" />
+
+        {authUser ? (
           <NavLink href="/dashboard" label="Dashboard" />
-        </div>
+        ) : (
+          <div className="space-x-4">
+            <NavLink href="/register" label="Register" />
+            <NavLink href="/login" label="Login" />
+          </div>
+        )}
       </nav>
     </header>
   );
