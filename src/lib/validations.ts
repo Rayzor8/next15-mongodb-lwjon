@@ -44,6 +44,9 @@ export const LoginSchema = z.object({
     .min(3, {
       message: "Password must be at least 3 characters long",
     })
+    .regex(/[A-Za-z]/, {
+      message: "Password must contain at least one letter",
+    })
     .max(10, {
       message: "Password must be less than 10 characters long",
     })
