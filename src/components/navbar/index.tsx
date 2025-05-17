@@ -1,5 +1,6 @@
 import getAuthUser from "@/lib/get-auth-user";
 import NavLink from "./navlink";
+import Logout from "./logout";
 
 export default async function Navbar() {
   const authUser = await getAuthUser();
@@ -10,7 +11,10 @@ export default async function Navbar() {
         <NavLink href="/" label="Home" />
 
         {authUser ? (
-          <NavLink href="/dashboard" label="Dashboard" />
+          <div className="flex gap-4">
+            <NavLink href="/dashboard" label="Dashboard" />
+            <Logout />
+          </div>
         ) : (
           <div className="space-x-4">
             <NavLink href="/register" label="Register" />

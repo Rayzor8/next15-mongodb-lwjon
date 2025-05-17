@@ -4,6 +4,7 @@ import { getCollection } from "@/lib/db";
 import { createSession } from "@/lib/session";
 import { LoginSchema, RegisterSchema } from "@/lib/validations";
 import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function register(prevState: unknown, formData: FormData) {
@@ -121,4 +122,10 @@ export async function login(prevState: unknown, formData: FormData) {
   // create session
   await createSession(existingUser._id.toString());
   redirect("/dashboard");
+}
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("user_session");
+  redirect("/");
 }
