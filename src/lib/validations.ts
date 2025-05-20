@@ -60,7 +60,7 @@ export const BlogSchema = z.object({
       message: "Title must be at least 3 characters long",
     })
     .max(50, {
-      message: "Title must be less than 100 characters long",
+      message: "Title must be less than 50 characters long",
     })
     .trim(),
   content: z
