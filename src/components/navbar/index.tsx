@@ -12,6 +12,7 @@ export default async function Navbar() {
 
         {authUser ? (
           <div className="flex gap-4">
+            <NavLink href="/posts/create" label="New Post" />
             <NavLink href="/dashboard" label="Dashboard" />
             <Logout />
           </div>

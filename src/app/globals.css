@@ -34,7 +34,7 @@ label {
 }
 
 .btn-primary {
-  @apply text-white cursor-pointer bg-indigo-600 px-4 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed;
+  @apply text-white cursor-pointer bg-indigo-600 px-4 py-1.5 rounded-md shadow-sm hover:bg-indigo-700 active:ring-2 ring-offset-1 ring-indigo-700 disabled:bg-slate-300 disabled:text-slate-100 disabled:cursor-not-allowed w-max;
 }
 
 .text-link {
@@ -43,4 +43,8 @@ label {
 
 .errorMsg{
   @apply text-red-500 text-sm;
+}
+
+.title {
+  @apply text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mb-3 text-center;
 }
