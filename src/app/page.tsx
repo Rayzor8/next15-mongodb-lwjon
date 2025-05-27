@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/posts/post-card";
 import { getCollection } from "@/lib/db";
 import { Post } from "@/lib/types";
