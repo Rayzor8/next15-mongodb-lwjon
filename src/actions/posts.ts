@@ -123,3 +123,7 @@ export async function updatePost(prevState: unknown, formData: FormData) {
 
   redirect("/dashboard");
 }
+
+export async function deletePost() {
+  console.log("deletePost: ");
+}
