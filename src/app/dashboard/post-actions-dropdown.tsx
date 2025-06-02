@@ -14,6 +14,7 @@ interface PostActionsDropdownProps {
 }
 
 export function PostActionsDropdown({ postId }: PostActionsDropdownProps) {
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -38,6 +39,7 @@ export function PostActionsDropdown({ postId }: PostActionsDropdownProps) {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <form action={deletePost}>
+            <input type="hidden" name="postId" defaultValue={postId} />
             <button type="submit" className="flex items-center">
               {" "}
               <Trash2 className="mr-4 h-4 w-4 " />

@@ -2,6 +2,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -58,6 +59,15 @@ export default async function Dashboard() {
             </TableRow>
           ))}
         </TableBody>
+        {userPosts.length === 0 && (
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={4} className="h-12 text-center italic text-yellow-700">
+                No posts found.
+              </TableCell>
+            </TableRow>
+          </TableFooter>
+        )}
       </Table>
     </div>
   );

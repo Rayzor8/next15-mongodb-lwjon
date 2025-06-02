@@ -4,6 +4,7 @@ import { getCollection } from "@/lib/db";
 import getAuthUser from "@/lib/get-auth-user";
 import { BlogSchema } from "@/lib/validations";
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const validateFormData = (formData: FormData) => {
@@ -124,6 +125,25 @@ export async function updatePost(prevState: unknown, formData: FormData) {
   redirect("/dashboard");
 }
 
-export async function deletePost() {
-  console.log("deletePost: ");
+export async function deletePost(formData: FormData) {
+  const postId = formData.get("postId") as string;
+
+  const user = await getAuthUser();
+  if (!user) return redirect("/");
+
+  const postsCollection = await getCollection("posts");
+  if (!postsCollection) return console.error("Posts collection not found");
+
+  const post = await postsCollection.findOne({ _id: new ObjectId(postId) });
+  if (!post) return console.error("Post not found");
+
+  const isOwner = user.userId === post.author.toString();
+  if (!isOwner) return redirect("/");
+
+  try {
+    await postsCollection.deleteOne({ _id: post._id });
+    revalidatePath("/dashboard");
+  } catch (error) {
+    console.error("Error deleting post:", error);
+  }
 }
